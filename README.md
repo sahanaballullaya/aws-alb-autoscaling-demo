@@ -1,5 +1,3 @@
-# aws-alb-autoscaling-demo
-AWS High Availability Architecture using ALB, EC2 and Auto Scaling with failure testing
 # AWS ALB + EC2 + Auto Scaling Demo
 
 This project demonstrates a highly available web architecture using:
