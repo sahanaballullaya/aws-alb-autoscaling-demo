@@ -1,101 +1,178 @@
-# AWS ALB + EC2 + Auto Scaling Demo
+# AWS High Availability Web Architecture  
+### ALB + EC2 + Auto Scaling + CloudWatch Dynamic Scaling
 
-This project demonstrates a highly available web architecture using:
+This project demonstrates a highly available AWS architecture using:
 
 - Amazon EC2
 - Application Load Balancer (ALB)
 - Target Groups
-- Health Checks
-- Failure Simulation
+- Auto Scaling Groups
+- CloudWatch Alarms
+- Dynamic Scaling based on CPU utilization
 
-The architecture distributes traffic across multiple instances and automatically redirects traffic when a server fails.
-
----
-
-## EC2 Instances Running
-
-![EC2 Instances](screenshots/ec2_instances_running.jpg)
+The architecture distributes traffic across multiple instances and automatically scales infrastructure based on system load.
 
 ---
 
-## Two Web Servers Running Without Load Balancer
+# Architecture Overview
 
-Each EC2 instance serves its own webpage.
+The architecture uses an Application Load Balancer to distribute traffic across EC2 instances managed by an Auto Scaling Group.
 
-![Webservers](screenshots/2 webservers without ALB.jpg)
-
----
-
-## Target Group Configuration
-
-Target group created to register EC2 instances and perform health checks.
-
-![Target Group](screenshots/target_group_configuration.jpg)
+If one instance fails or system load increases, traffic is automatically redirected and new instances are launched.
 
 ---
 
-## Target Group Healthy Instances
+# EC2 Instances Running
 
-Both instances are registered and healthy.
+Two EC2 instances were created to host the web servers.
 
-![Healthy Instances](screenshots/target_group_healthy_instances.jpg)
-
----
-
-## Application Load Balancer Configuration
-
-Application Load Balancer created to distribute traffic.
-
-![ALB Configuration](screenshots/alb_configuration.jpg)
+![EC2 Instances](screenshots/ec2_instances_running.png)
 
 ---
 
-## Load Balancing Demonstration
+# Web Servers Running Without Load Balancer
 
-Traffic is distributed between both EC2 instances.
+Each EC2 instance serves its own webpage before the load balancer is configured.
 
-Refreshing the page alternates between Server 1 and Server 2.
-
-![Load Balancing](screenshots/alb_load_balancing.jpg)
+![Webservers](screenshots/webservers_without_alb.png)
 
 ---
 
-## Failure Simulation
+# Target Group Configuration
 
-One EC2 instance was stopped to simulate server failure.
+A target group was created to register EC2 instances and perform health checks.
 
-![Failure Simulation](screenshots/instance_failure_simulation.jpg)
-
----
-
-## Target Group After Instance Stop
-
-The stopped instance is no longer used for routing.
-
-![Target Group After Stop](screenshots/target_group_after_instance_stop.jpg)
+![Target Group Configuration](screenshots/target_group_configuration.png)
 
 ---
 
-## Traffic Redirected to Healthy Server
+# Target Group Healthy Instances
+
+Both EC2 instances passed the health checks successfully.
+
+![Healthy Instances](screenshots/target_group_healthy_instances.png)
+
+---
+
+# Application Load Balancer Configuration
+
+An Application Load Balancer distributes incoming traffic to the target group.
+
+![ALB Configuration](screenshots/alb_configuration.png)
+
+---
+
+# Load Balancing Demonstration
+
+Refreshing the ALB DNS endpoint shows traffic alternating between both EC2 instances.
+
+![Load Balancing](screenshots/alb_load_balancing_demo.png)
+
+---
+
+# Failure Simulation
+
+One EC2 instance was stopped to simulate infrastructure failure.
+
+![Failure Simulation](screenshots/instance_failure_simulation.png)
+
+---
+
+# Target Group After Instance Stop
+
+The stopped instance is no longer used by the load balancer.
+
+![Target Group After Stop](screenshots/target_group_after_instance_stop.png)
+
+---
+
+# Traffic Redirected to Healthy Server
 
 All traffic is automatically routed to the remaining healthy instance.
 
-![Traffic Redirect](screenshots/traffic_redirect_to_server2.jpg)
+![Traffic Redirect](screenshots/traffic_redirect_to_server2.png)
 
 ---
 
-## Key Learnings
+# Launch Template Configuration
 
-- Load balancers distribute traffic across servers
-- Health checks detect unhealthy instances
-- Fault tolerance ensures service availability
-- Traffic automatically redirects during failures
+A launch template was created to define how new EC2 instances are launched by the Auto Scaling Group.
+
+![Launch Template](screenshots/launch_template_configuration.png)
 
 ---
 
-## Technologies Used
+# Auto Scaling Group Configuration
 
-- AWS EC2
+An Auto Scaling Group manages the EC2 instances and maintains system availability.
+
+![ASG Configuration](screenshots/autoscaling_group_configuration.png)
+
+---
+
+# Dynamic Scaling Policy
+
+Dynamic scaling was configured to scale out when CPU utilization exceeds **40%**.
+
+![Scaling Policy](screenshots/dynamic_scaling_policy_cpu40.png)
+
+---
+
+# CloudWatch Alarm
+
+CloudWatch monitors CPU utilization and triggers scaling actions.
+
+![CloudWatch Alarm](screenshots/cloudwatch_cpu_alarm.png)
+
+---
+
+# CPU Utilization Spike
+
+A stress test was executed on the EC2 instance to increase CPU usage.
+
+![CPU Spike](screenshots/cpu_utilization_spike.png)
+
+---
+
+# Auto Scaling Activity
+
+Auto Scaling detects the high CPU load and launches a new EC2 instance.
+
+![Scaling Activity](screenshots/autoscaling_scale_out_activity.png)
+
+---
+
+# New Instance Launched
+
+The Auto Scaling Group successfully launched a new EC2 instance to handle increased traffic.
+
+![New Instance](screenshots/asg_new_instance_launched.png)
+
+---
+
+# Key Learnings
+
+This project demonstrates key cloud infrastructure principles:
+
+- Load balancing improves application availability
+- Health checks ensure traffic reaches only healthy instances
+- Auto Scaling enables infrastructure elasticity
+- CloudWatch alarms allow automated scaling decisions
+- Fault tolerance ensures minimal service disruption
+
+---
+
+# Technologies Used
+
+- Amazon EC2
 - Application Load Balancer
 - Target Groups
-- Auto Scaling
+- Auto Scaling Groups
+- AWS CloudWatch
+
+---
+
+# Author
+
+Sahana Ballullaya  
+GitHub: https://github.com/sahanaballullaya
