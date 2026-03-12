@@ -1,4 +1,4 @@
-# AWS High Availability Web Architecture  
+# AWS High Availability Web Architecture
 ### ALB + EC2 + Auto Scaling + CloudWatch Dynamic Scaling
 
 This project demonstrates a highly available AWS architecture using:
@@ -26,7 +26,7 @@ If one instance fails or system load increases, traffic is automatically redirec
 
 Two EC2 instances were created to host the web servers.
 
-![EC2 Instances](screenshots/ec2_instances_running.png)
+![EC2 Instances](screenshots/ec2_instances_running.jpg)
 
 ---
 
@@ -34,7 +34,7 @@ Two EC2 instances were created to host the web servers.
 
 Each EC2 instance serves its own webpage before the load balancer is configured.
 
-![Webservers](screenshots/webservers_without_alb.png)
+![Webservers](screenshots/webservers_without_alb.jpg)
 
 ---
 
@@ -42,7 +42,7 @@ Each EC2 instance serves its own webpage before the load balancer is configured.
 
 A target group was created to register EC2 instances and perform health checks.
 
-![Target Group Configuration](screenshots/target_group_configuration.png)
+![Target Group Configuration](screenshots/target_group_configuration.jpg)
 
 ---
 
@@ -50,7 +50,7 @@ A target group was created to register EC2 instances and perform health checks.
 
 Both EC2 instances passed the health checks successfully.
 
-![Healthy Instances](screenshots/target_group_healthy_instances.png)
+![Healthy Instances](screenshots/target_group_healthy_instances.jpg)
 
 ---
 
@@ -58,7 +58,7 @@ Both EC2 instances passed the health checks successfully.
 
 An Application Load Balancer distributes incoming traffic to the target group.
 
-![ALB Configuration](screenshots/alb_configuration.png)
+![ALB Configuration](screenshots/alb_configuration.jpg)
 
 ---
 
@@ -66,7 +66,7 @@ An Application Load Balancer distributes incoming traffic to the target group.
 
 Refreshing the ALB DNS endpoint shows traffic alternating between both EC2 instances.
 
-![Load Balancing](screenshots/alb_load_balancing_demo.png)
+![Load Balancing](screenshots/alb_load_balancing_demo.jpg)
 
 ---
 
@@ -74,7 +74,7 @@ Refreshing the ALB DNS endpoint shows traffic alternating between both EC2 insta
 
 One EC2 instance was stopped to simulate infrastructure failure.
 
-![Failure Simulation](screenshots/instance_failure_simulation.png)
+![Failure Simulation](screenshots/instance_failure_simulation.jpg)
 
 ---
 
@@ -82,7 +82,7 @@ One EC2 instance was stopped to simulate infrastructure failure.
 
 The stopped instance is no longer used by the load balancer.
 
-![Target Group After Stop](screenshots/target_group_after_instance_stop.png)
+![Target Group After Stop](screenshots/target_group_after_instance_stop.jpg)
 
 ---
 
@@ -90,7 +90,7 @@ The stopped instance is no longer used by the load balancer.
 
 All traffic is automatically routed to the remaining healthy instance.
 
-![Traffic Redirect](screenshots/traffic_redirect_to_server2.png)
+![Traffic Redirect](screenshots/traffic_redirect_to_server2.jpg)
 
 ---
 
@@ -98,7 +98,7 @@ All traffic is automatically routed to the remaining healthy instance.
 
 A launch template was created to define how new EC2 instances are launched by the Auto Scaling Group.
 
-![Launch Template](screenshots/launch_template_configuration.png)
+![Launch Template](screenshots/launch_template_configuration.jpg)
 
 ---
 
@@ -106,7 +106,7 @@ A launch template was created to define how new EC2 instances are launched by th
 
 An Auto Scaling Group manages the EC2 instances and maintains system availability.
 
-![ASG Configuration](screenshots/autoscaling_group_configuration.png)
+![ASG Configuration](screenshots/autoscaling_group_configuration.jpg)
 
 ---
 
@@ -114,7 +114,7 @@ An Auto Scaling Group manages the EC2 instances and maintains system availabilit
 
 Dynamic scaling was configured to scale out when CPU utilization exceeds **40%**.
 
-![Scaling Policy](screenshots/dynamic_scaling_policy_cpu40.png)
+![Scaling Policy](screenshots/dynamic_scaling_policy_cpu40.jpg)
 
 ---
 
@@ -122,7 +122,7 @@ Dynamic scaling was configured to scale out when CPU utilization exceeds **40%**
 
 CloudWatch monitors CPU utilization and triggers scaling actions.
 
-![CloudWatch Alarm](screenshots/cloudwatch_cpu_alarm.png)
+![CloudWatch Alarm](screenshots/cloudwatch_cpu_alarm.jpg)
 
 ---
 
@@ -130,7 +130,7 @@ CloudWatch monitors CPU utilization and triggers scaling actions.
 
 A stress test was executed on the EC2 instance to increase CPU usage.
 
-![CPU Spike](screenshots/cpu_utilization_spike.png)
+![CPU Spike](screenshots/cpu_utilization_spike.jpg)
 
 ---
 
@@ -138,7 +138,7 @@ A stress test was executed on the EC2 instance to increase CPU usage.
 
 Auto Scaling detects the high CPU load and launches a new EC2 instance.
 
-![Scaling Activity](screenshots/autoscaling_scale_out_activity.png)
+![Scaling Activity](screenshots/autoscaling_scale_out_activity.jpg)
 
 ---
 
@@ -146,7 +146,7 @@ Auto Scaling detects the high CPU load and launches a new EC2 instance.
 
 The Auto Scaling Group successfully launched a new EC2 instance to handle increased traffic.
 
-![New Instance](screenshots/asg_new_instance_launched.png)
+![New Instance](screenshots/asg_new_instance_launched.jpg)
 
 ---
 
